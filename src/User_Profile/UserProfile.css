@@ -1,0 +1,175 @@
+.UserProfile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+.user-profile-container {
+  width: 100%;
+  max-width: 900px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  height: 90%;
+}
+
+.user-profile-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.user-profile-text {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.user-profile-underline {
+  width: 50px;
+  height: 4px;
+  background-color: #007bff;
+  margin: 0 auto;
+}
+
+.user-profile-inputs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center; /* Center items horizontally */
+}
+
+.user-profile-input {
+  margin-bottom: 20px;
+  flex: 1 1 300px; /* Adjust as needed for responsive layout */
+}
+
+.user-profile-input label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.user-profile-input input,
+.user-profile-input select,
+.user-profile-input textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  color: #333;
+}
+
+.user-profile-checkbox-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.user-profile-checkbox-item {
+  display: flex;
+  align-items: center;
+}
+
+.user-profile-checkbox-item input {
+  margin-right: 5px;
+}
+
+.user-profile-error {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.user-profile-submit-container {
+  text-align: center;
+}
+
+.user-profile-submit {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+}
+.multiselect-container .multiselect-item:hover {
+  background-color: #f0f0f0; /* Change background color on hover */
+}
+
+#preferences {
+  width: 100%; /* Ensure full width */
+  padding: 8px;
+  border: 1px solid black;
+  border-radius: 4px;
+  font-size: 16px;
+  resize: vertical; /* Allow vertical resizing */
+}
+
+.user-profile-date-picker {
+  width: 100%;
+}
+
+.user-profile-date-input {
+   width: 600px;
+}
+
+.user-profile-availability-tag {
+  display: inline-block;
+  background-color: hwb(0 94% 6%);
+  padding: 4px 8px;
+  border-radius: 4px;
+  margin-bottom: 8px; /* Adjust spacing */
+}
+
+.user-profile-availability-tag-remove {
+  margin-left: 8px;
+  cursor: pointer;
+  color: red;
+}
+
+.user-profile-clear-dates {
+  margin-left: 8px;
+  background-color: #f0f0f0;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+
+
+.user-profile-input input,
+.multiselect-react-dropdown user-profile-input,
+.user-profile-input select,
+.user-profile-input textarea,
+.user-profile-date-input,
+.user-profile-preferences-textarea,
+.multiselect-native-select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #000; /* Black outline */
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+#skills {
+  border: 1px solid black;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+#available {
+  width: 95%;
+}
+
+.rmdp-container{
+  width: 100%;
+}
+
+#state {
+    color: #333; /* Example color; adjust as per your design */
+}
+
