@@ -1,0 +1,40 @@
+/* Volunteer_History.css */
+
+.volunteer-history {
+    margin: 20px auto;
+    padding: 10px;
+    width: 95%;
+    
+    border-radius: 10px;
+  
+  }
+  
+  .volunteer-history h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .volunteer-history-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .volunteer-history-table th,
+  .volunteer-history-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .volunteer-history-table th {
+    background-color: #4CAF50;
+    color: white;
+  }
+  
+  .volunteer-history-table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  .volunteer-history-table tbody tr:hover {
+    background-color: #ddd;
+  }
