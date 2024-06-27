@@ -10,8 +10,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "date-fns": "^3.6.0",
     "multiselect-react-dropdown": "^2.0.25",
     "react": "^18.3.1",
+    "react-datepicker": "^7.2.0",
     "react-dom": "^18.3.1",
     "react-multi-date-picker": "^4.5.2",
     "react-router-dom": "^6.24.0",
