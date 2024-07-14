@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import NavBar from '../components/navbar'
 import './Volunteer_Form.css';
 
 const Volunteer_Form = () => {
@@ -123,6 +124,8 @@ const Volunteer_Form = () => {
   };
 
   return (
+    <>
+      < NavBar/>
     <div className="auth-background">
       <div className="container">
         <div className="header">
@@ -167,6 +170,7 @@ const Volunteer_Form = () => {
         </form>
       </div>
     </div>
+    </>
   );
 };
 

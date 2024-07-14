@@ -2,26 +2,15 @@ import React, { useState } from 'react';
 import './Signup.css'
 import { Link, useNavigate } from 'react-router-dom';
 
+
 const SignUp = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
-  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   const handleSignUp = async () => {
-    if (password.length < 6) {
-      setError('Password must be at least 6 characters long.');
-      return;
-    }
-
-    if (username.length < 3) {
-      setError('Username must be at least 3 characters long.');
-      return;
-    }
-
-    setError('');
-    const admin = 0;
+    const admin = 1;
     console.log(email);
     const url = 'http://localhost:3000/api/register'; // Adjust the URL based on your server setup
     const response = await fetch(url, {
@@ -59,8 +48,6 @@ const SignUp = () => {
           <div className="signup-underline"></div>
         </div>
 
-        {error && <div className="signup-error">{error}</div>}
-
         <div className="signup-inputs">
           <div className="input">
             <label htmlFor="Email">Email</label>
@@ -76,7 +63,7 @@ const SignUp = () => {
           </div>
           
           <div className="input">
-            <label htmlFor="Password">Password (min 6 characters)</label>
+            <label htmlFor="Password">Password</label>
             <input 
               type='password'
               id='Password'
@@ -89,7 +76,7 @@ const SignUp = () => {
           </div>
 
           <div className="input">
-            <label htmlFor="Username">Username (min 3 characters)</label>
+            <label htmlFor="Username">Username</label>
             <input 
               type='text'
               id='Username'

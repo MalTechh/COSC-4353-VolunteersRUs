@@ -1,0 +1,29 @@
+/* logout.css */
+
+/* Styling the logout button to match the navbar color scheme */
+.logout-button {
+    background-color: #444; /* Slightly lighter than the navbar's #333 */
+    color: #fff; /* White text for contrast */
+    border: none;
+    padding: 8px 16px; /* Slightly adjusted padding */
+    font-size: 1em;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth background color transition */
+    margin-left: 20px; /* Space between the logo and the button */
+}
+
+.logout-button:hover {
+    background-color: #555; /* Darker on hover to provide feedback */
+    transform: scale(1.05); /* Slight scaling for a responsive feel */
+}
+
+.logout-button:active {
+    background-color: #666; /* Even darker when clicked */
+    transform: scale(1); /* Reset scaling */
+}
+
+.logout-button:focus {
+    outline: none; /* Remove default focus outline */
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.2); /* Subtle focus ring for accessibility */
+}

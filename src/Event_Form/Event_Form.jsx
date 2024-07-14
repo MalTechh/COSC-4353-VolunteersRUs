@@ -3,17 +3,19 @@ import './Event_Form.css';
 import { useNavigate } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { addDays } from 'date-fns'; // Import addDays function
+import { addDays } from 'date-fns';
+import NavBar from '../components/navbar';
 import MultiSelect from 'multiselect-react-dropdown';
 
 const Event_Form = () => {
   const [eventName, setEventName] = useState('');
   const [eventDescription, setEventDescription] = useState('');
   const [location, setLocation] = useState('');
-  const [requiredSkills, setRequiredSkills] = useState([]); // State for selected skills
+  const [requiredSkills, setRequiredSkills] = useState([]);
   const [urgency, setUrgency] = useState('');
   const [eventDate, setEventDate] = useState(null);
   const [errors, setErrors] = useState({});
+  const [notification, setNotification] = useState('');
   const navigate = useNavigate();
 
   const validateForm = () => {
@@ -32,9 +34,12 @@ const Event_Form = () => {
   };
 
   const handleEvent = async () => {
+    if (!validateForm()) {
+      return;
+    }
+
     const url = 'http://localhost:3000/api/events';
     const token = sessionStorage.getItem('authToken');
-  
     const skillNames = requiredSkills.map(skill => skill.name);
 
     const eventData = {
@@ -45,7 +50,7 @@ const Event_Form = () => {
       Urgency: urgency,
       EventDate: eventDate.toISOString().split('T')[0],
     };
-  
+
     try {
       const response = await fetch(url, {
         method: 'POST',
@@ -55,20 +60,25 @@ const Event_Form = () => {
         },
         body: JSON.stringify(eventData),
       });
-  
+
       if (response.ok) {
         const result = await response.json();
         console.log('Event created successfully:', result);
-        resetForm(); // Reset the form only if event creation was successful
-        // Optionally, navigate to a different page or show a success message
+        setNotification('Event created successfully!');
+        resetForm();
       } else {
         console.error('Error creating event:', response.statusText);
-        // Optionally, handle the error (e.g., show error message to user)
+        setNotification('Error creating event: ' + response.statusText);
       }
     } catch (error) {
       console.error('Error creating event:', error.message);
-      // Optionally, handle the error (e.g., show error message to user)
+      setNotification('Error creating event: ' + error.message);
     }
+
+    // Clear notification after a few seconds
+    setTimeout(() => {
+      setNotification('');
+    }, 5000);
   };
 
   const resetForm = () => {
@@ -96,6 +106,8 @@ const Event_Form = () => {
   ];
 
   return (
+    <>
+    <NavBar />
     <div className="auth-background">
       <div className="container">
         <div className="header">
@@ -199,11 +211,11 @@ const Event_Form = () => {
               id="eventDate"
               selected={eventDate}
               onChange={(date) => setEventDate(date)}
-              minDate={new Date()} // Set minDate to today
+              minDate={new Date()}
               placeholderText="Select Event Date"
               required
               aria-required="true"
-              className="full-width-input" // Added class for styling
+              className="full-width-input"
             />
             {errors.eventDate && <div className="error">{errors.eventDate}</div>}
           </div>
@@ -213,8 +225,14 @@ const Event_Form = () => {
             Create Event
           </button>
         </div>
+        {notification && (
+          <div className="notification">
+            {notification}
+          </div>
+        )}
       </div>
     </div>
+    </>
   );
 };
 

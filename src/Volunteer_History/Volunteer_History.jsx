@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import NavBar from '../components/navbar.jsx'
 import './Volunteer_History.css';
 
 const Volunteer_History = () => {
@@ -42,6 +43,8 @@ const Volunteer_History = () => {
   };
   
   return (
+    <>
+      < NavBar/>
     <div className="volunteer-history">
       <h2>Volunteer History</h2>
       <table className="volunteer-history-table">
@@ -65,7 +68,7 @@ const Volunteer_History = () => {
                 <td>{event.EventName}</td>
                 <td>{event.Description}</td>
                 <td>{event.Location}</td>
-                <td>{event.RequiredSkills}</td> {/* Assuming RequiredSkills is a string */}
+                <td>{event.RequiredSkills}</td> 
                 <td>{event.Urgency}</td>
                 <td>{event.EventDate}</td>
                 <td>{event.Status}</td>
@@ -79,6 +82,7 @@ const Volunteer_History = () => {
         </tbody>
       </table>
     </div>
+    </>
   );
 };
 
