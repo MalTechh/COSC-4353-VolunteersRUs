@@ -64,6 +64,9 @@ const Home = () => {
             <Link to="/editprofile" className="home-card">
               <h3>Edit User Profile</h3>
             </Link>
+            <Link to="/eventmanagement" className="home-card">
+              <h3>Event Management</h3>
+            </Link>
           </>
         ) : null}
       </div>

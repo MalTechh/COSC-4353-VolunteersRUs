@@ -6,6 +6,8 @@ import AdminSignUp from './Authentication/AdminSignUp.jsx'
 import Login from './Authentication/Login';
 import Home from './Homepage/Home';
 import EventForm from './Event_Form/Event_Form';
+import EventManagement from './Event_Form/Event_Management.jsx';
+import EditEvent from './Event_Form/Edit_Event.jsx'
 import UserProfile from './User_Profile/UserProfile.jsx'
 import Notification from './Notification.jsx';
 import VolunteerForm from './Volunteer_Form/Volunteer_Form';
@@ -24,6 +26,8 @@ function App() {
           <Route path="/adminsignup" element={<AdminSignUp/>} />
           <Route path="/" element={<Login />} />
           <Route path="/eventform" element={<EventForm />} />  
+          <Route path="/eventmanagement" element={<EventManagement />} />  
+          <Route path="/editevent/:eventId" element={<EditEvent />} />
           <Route path="/userprofile" element={<UserProfile />} />
           <Route path="/editprofile" element={<EditProfile />} />
           <Route path="/notification" element={<Notification />} />

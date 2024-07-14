@@ -229,3 +229,66 @@ export const getVolunteerHistory = (req, res) => {
   // Send the structured response
   res.status(200).json({ history: formattedHistory });
 };
+
+
+// controllers/eventController.js
+
+export const updateEvent = (req, res) => {
+  const { EventID, EventName, Description, Location, RequiredSkills, Urgency, EventDate } = req.body;
+
+  // Find the event by ID
+  const eventIndex = events.findIndex(event => event.EventID === EventID);
+  if (eventIndex === -1) {
+    return res.status(404).json({ error: 'Event not found' });
+  }
+
+  // Validate event data
+  const validation = validateEvent(req.body);
+  if (!validation.valid) {
+    return res.status(400).json({ error: validation.message });
+  }
+
+  // Update the event
+  events[eventIndex] = {
+    EventID,
+    EventName,
+    Description,
+    Location,
+    RequiredSkills,
+    Urgency,
+    EventDate,
+  };
+
+  // Send response
+  res.status(200).json(events[eventIndex]);
+};
+
+export const getAllEvents = (req, res) => {
+  res.status(200).json(events);
+};
+
+// Delete an event by ID
+export const deleteEvent = (req, res) => {
+  const { eventId } = req.params;
+
+  const eventIndex = events.findIndex(event => event.EventID === parseInt(eventId, 10));
+  if (eventIndex === -1) {
+    return res.status(404).json({ error: 'Event not found' });
+  }
+
+  // Remove the event from the array
+  events.splice(eventIndex, 1);
+
+  res.status(204).send(); // No content to send back
+};
+
+export const getEventById = (req, res) => {
+  const { eventId } = req.params;
+  const event = events.find(evt => evt.EventID === parseInt(eventId, 10));
+
+  if (!event) {
+    return res.status(404).json({ error: 'Event not found' });
+  }
+
+  res.status(200).json(event);
+};
