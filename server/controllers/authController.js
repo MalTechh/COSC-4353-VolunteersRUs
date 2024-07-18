@@ -96,3 +96,36 @@ export const getUserById = async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error.' });
   }
 };
+
+
+export const login = async (req, res) => {
+  const { email, passwordhash } = req.body;
+
+  try {
+    // Find the user by email in the hardcoded users array
+    const user = users.find(u => u.email === email);
+
+    if (!user) {
+      return res.status(400).json({ error: 'Invalid credentials.' });
+    }
+
+    // Compare the provided password with the hashed password
+    const isMatch = await bcrypt.compare(passwordhash, user.passwordhash);
+    if (!isMatch) {
+      return res.status(400).json({ error: 'Invalid credentials.' });
+    }
+
+    // Retrieve the UserType from the user
+    const { UserType, UserID } = user;
+
+    // Sign the token with UserID and UserType
+    const token = sign({ UserID, UserType }, config.jwtSecret);
+
+    // Respond with a success message and the token
+    res.json({ message: 'Login successful!', token });
+
+  } catch (error) {
+    console.error('Error logging in:', error);
+    res.status(500).json({ error: 'Error logging in.' });
+  }
+};
