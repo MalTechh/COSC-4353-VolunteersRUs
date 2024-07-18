@@ -1,8 +1,16 @@
-
 import request from 'supertest';
 import express from 'express';
 import bodyParser from 'body-parser';
-import { register, getUserById } from './authController';
+import jwt from 'jsonwebtoken';
+import bcrypt from 'bcryptjs';
+import { register, getUserById } from '../../server/controllers/authController';
+
+// Mock dependencies
+jest.mock('bcryptjs');
+jest.mock('jsonwebtoken');
+
+// In-memory user storage for the tests
+let users = [];
 
 const app = express();
 app.use(bodyParser.json());
@@ -17,6 +25,9 @@ describe('Auth Controller', () => {
 
   describe('POST /register', () => {
     it('should register a user successfully', async () => {
+      bcrypt.hash.mockResolvedValue('hashedPassword');
+      jwt.sign.mockReturnValue('token');
+
       const res = await request(app)
         .post('/register')
         .send({
@@ -89,6 +100,20 @@ describe('Auth Controller', () => {
 
   describe('GET /user', () => {
     it('should return user data for a valid token', async () => {
+      // Mock user data
+      const mockUser = {
+        UserID: 1,
+        email: 'test@example.com',
+        passwordhash: 'hashedPassword',
+        username: 'testuser',
+        UserType: 'Admin',
+      };
+      users.push(mockUser);
+
+      // Mock JWT functions
+      jwt.sign.mockReturnValue('token');
+      jwt.verify.mockReturnValue({ UserID: 1 });
+
       // Register a user to get a token
       const registerRes = await request(app)
         .post('/register')
@@ -120,6 +145,7 @@ describe('Auth Controller', () => {
 
     it('should return 404 if user is not found', async () => {
       const fakeToken = jwt.sign({ UserID: 999, UserType: 'Admin' }, 'your_jwt_secret');
+      jwt.verify.mockReturnValue({ UserID: 999 });
 
       const res = await request(app)
         .get('/user')
@@ -130,6 +156,10 @@ describe('Auth Controller', () => {
     });
 
     it('should return 500 if token is invalid', async () => {
+      jwt.verify.mockImplementation(() => {
+        throw new Error('Invalid token');
+      });
+
       const res = await request(app)
         .get('/user')
         .set('Authorization', 'Bearer invalidtoken');

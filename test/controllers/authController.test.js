@@ -1,6 +1,6 @@
 // authController.test.js
 
-import { register, getUserById } from './authController';
+import { register, getUserById } from '../../server/controllers/authController';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
