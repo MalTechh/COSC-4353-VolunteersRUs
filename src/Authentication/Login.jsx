@@ -1,37 +1,37 @@
 import React, { useState } from 'react';
-import './Login.css';
-import { Link } from 'react-router-dom';
+import './LogIn.css';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [errors, setErrors] = useState({});
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleLogin = async () => {
+    const url = 'http://localhost:3000/api/login'; 
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email,
+        passwordhash: password,
+      }),
+    });
 
+    if (response.ok) {
+      const data = await response.json();
+      console.log('Login successful:', data);
 
-    if (!email.trim()) {
-      setErrors(prevErrors => ({
-        ...prevErrors,
-        email: 'Email is required.'
-      }));
-      return;
+      sessionStorage.setItem('authToken', data.token);
+
+      navigate('/home');
+      // Handle success case (redirect, show message, etc.)
+    } else {
+      console.error('Error logging in:', response.statusText);
+      // Handle error case (display error message, retry, etc.)
     }
-
-    if (!password.trim()) {
-      setErrors(prevErrors => ({
-        ...prevErrors,
-        password: 'Password is required.'
-      }));
-      return;
-    }
-
-
-    setErrors({});
-
-    
-    alert('Login functionality is disabled in this demo.');
   };
 
   return (
@@ -44,7 +44,7 @@ const Login = () => {
 
         <div className="login-inputs">
           <div className="input">
-            <label htmlFor="Email">Username</label>
+            <label htmlFor="Email">Email</label>
             <input
               type="text"
               id="Email"
@@ -54,7 +54,6 @@ const Login = () => {
               required
               aria-required="true"
             />
-            {errors.email && <span className="error">{errors.email}</span>}
           </div>
 
           <div className="input">
@@ -68,18 +67,15 @@ const Login = () => {
               required
               aria-required="true"
             />
-            {errors.password && <span className="error">{errors.password}</span>}
           </div>
         </div>
 
         <div className="login-submit-container">
-          <button className="authentication-submit" onClick={handleSubmit}>
+          <button className="submit" onClick={handleLogin}>
             Login
           </button>
           <p>
             Don't have an account? <Link to="/signup">Click here to sign up</Link>
-            <div></div>
-           <Link to="/adminsignup"> Administrator Sign Up </Link>
           </p>
         </div>
       </div>
