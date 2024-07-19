@@ -9,7 +9,7 @@ import {
   getAllEvents,
   deleteEvent,
   getEventById, // New controller for getting a single event
-} from '../controllers/eventController.js';
+} from '../controllers/eventVolunteerController.js';
 import authMiddleware from '../middlewares/authMiddleware.js';
 
 const router = Router();

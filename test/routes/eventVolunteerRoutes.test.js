@@ -1,11 +1,11 @@
 import request from 'supertest';
 import express from 'express';
 import bodyParser from 'body-parser';
-import eventRoutes from '../../server/routes/eventRoutes';
-import * as eventController from '../../server/controllers/eventController';
+import eventRoutes from '../../server/routes/eventVolunteerRoutes';
+import * as eventController from '../../server/controllers/eventVolunteerController';
 import authMiddleware from '../../server/middlewares/authMiddleware';
 
-jest.mock('../../server/controllers/eventController');
+jest.mock('../../server/controllers/eventVolunteerController');
 jest.mock('../../server/middlewares/authMiddleware');
 
 const app = express();

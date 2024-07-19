@@ -8,7 +8,7 @@ import {
     getAllEvents,
     deleteEvent,
     getEventById
-  } from '../../server/controllers/eventController';
+  } from '../../server/controllers/eventVolunteerController';
   
   describe('Event Controller', () => {
     let req;
