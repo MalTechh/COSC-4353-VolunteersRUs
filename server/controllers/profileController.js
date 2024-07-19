@@ -48,7 +48,6 @@ export const createProfile = [
     } = req.body;
 
     try {
-      // Hardcoded profile data for testing
       const profile = {
         UserID: 1,
         FullName: fullName,
@@ -62,9 +61,7 @@ export const createProfile = [
         Availability: JSON.stringify(availability),
       };
 
-      // Save profile to server-side storage
       savedProfile = profile;
-      // Return the created profile
       res.status(201).json(profile);
     } catch (error) {
       console.error('Error creating profile:', error);

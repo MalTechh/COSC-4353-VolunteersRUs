@@ -65,6 +65,38 @@ export const register = async (req, res) => {
   }
 };
 
+export const getUserById = async (req, res) => {
+  // Assuming the JWT is sent in the Authorization header
+  const token = req.headers.authorization?.split(' ')[1];
+
+  if (!token) {
+    return res.status(401).json({ error: 'No token provided.' });
+  }
+
+  try {
+    // Verify the token and extract user info
+    const decoded = jwt.verify(token, 'your_jwt_secret');
+    const user = users.find((u) => u.UserID === decoded.UserID);
+
+    if (!user) {
+      return res.status(404).json({ error: 'User not found.' });
+    }
+
+    // Send back the user's data
+    res.json({
+      UserID: user.UserID,
+      username: user.username,
+      email: user.email,
+      UserType: user.UserType,
+    });
+
+  } catch (error) {
+    console.error('Error fetching user:', error);
+    res.status(500).json({ error: 'Internal Server Error.' });
+  }
+};
+
+
 export const login = async (req, res) => {
   const { email, passwordhash } = req.body;
 
@@ -94,37 +126,5 @@ export const login = async (req, res) => {
   } catch (error) {
     console.error('Error logging in:', error);
     res.status(500).json({ error: 'Error logging in.' });
-  }
-};
-
-
-export const getUserById = async (req, res) => {
-  // Assuming the JWT is sent in the Authorization header
-  const token = req.headers.authorization?.split(' ')[1];
-
-  if (!token) {
-    return res.status(401).json({ error: 'No token provided.' });
-  }
-
-  try {
-    // Verify the token and extract user info
-    const decoded = jwt.verify(token, 'your_jwt_secret');
-    const user = users.find((u) => u.UserID === decoded.UserID);
-
-    if (!user) {
-      return res.status(404).json({ error: 'User not found.' });
-    }
-
-    // Send back the user's data
-    res.json({
-      UserID: user.UserID,
-      username: user.username,
-      email: user.email,
-      UserType: user.UserType,
-    });
-
-  } catch (error) {
-    console.error('Error fetching user:', error);
-    res.status(500).json({ error: 'Internal Server Error.' });
   }
 };

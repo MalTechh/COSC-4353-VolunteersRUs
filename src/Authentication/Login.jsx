@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './LogIn.css';
+import './Login.css';
 import { Link, useNavigate } from 'react-router-dom';
 
 const Login = () => {
@@ -8,7 +8,8 @@ const Login = () => {
   const navigate = useNavigate();
 
   const handleLogin = async () => {
-    const url = 'http://localhost:3000/api/login'; 
+ url = 'http://localhost:3000/api/login'; // Adjust the URL based on your server setup
+
     const response = await fetch(url, {
       method: 'POST',
       headers: {
