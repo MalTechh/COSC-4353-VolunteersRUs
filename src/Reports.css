@@ -1,0 +1,27 @@
+/* Container to center the buttons */
+.reports-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 80vh;
+  }
+  
+  /* Style for the report buttons */
+  .report-button {
+    padding: 20px 40px;
+    margin: 20px;
+    font-size: 1.5rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #be44df;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .report-button:hover {
+    background-color: #be44df;
+
+  }
+  
